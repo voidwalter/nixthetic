@@ -1,0 +1,195 @@
+$mod = SUPER
+$scriptsDir = $HOME/.config/hypr/scripts
+$noctalia = qs -c noctalia-shell ipc call
+source = $HOME/.config/hypr/configs/defaults.conf
+
+# Applications
+bind = $mod,      W, exec, zen
+bind = $mod,      B, exec, brave
+bind = $mod,      T, exec, $term
+bind = $mod,      F, exec, dolphin
+bind = $mod SHIFT,T, exec, ghostty
+
+# Hot Keys
+bind = $mod,            Q,      killactive,
+bind = $mod SHIFT,      Q,      exec, $scriptsDir/quitProcess.sh
+bind = $mod SHIFT,      F,      fullscreen,
+bind = $mod CTRL,       F,      fullscreen, 1
+bind = $mod,            SPACE,  togglefloating,
+bind = $mod ALT,        SPACE,  exec, hyprctl dispatch workspaceopt allfloat
+bind = $mod SHIFT,      Return, exec, $scriptsDir/Dropterminal.sh $term
+bind = ALT,                 Tab,    cyclenext
+bind = ALT,                 Tab,    bringactivetotop
+
+# Launcher
+bind = $mod,      X, exec, vicinae toggle
+bind = $mod SHIFT,X, exec, $noctalia launcher toggle
+bind = $mod CTRL, X, exec, $noctalia launcher command
+bind = $mod SHIFT,E, exec, $noctalia launcher emoji
+bind = $mod ALT,  V, exec, vicinae vicinae://extensions/vicinae/clipboard/history
+bind = $mod ALT,  X, exec, vicinae vicinae://extensions/vicinae/wikipedia/searchpage
+bind = $mod ALT,  F, exec, vicinae vicinae://extensions/vicinae/file/search
+
+# Hyprland Plugins
+bind = $mod, Z, easymotion, action:hyprctl dispatch focuswindow address:{}
+bind = $mod, A, hyprexpo:expo, toggle
+
+# Hyprshot
+bind = $mod SHIFT, S,     exec, hyprshot -m region --clipboard-only
+bind = $mod,       Print, exec, hyprshot -m window -o ~/Pictures/Screenshots/
+bind = SHIFT,          Print, exec, hyprshot -m region -o ~/Pictures/Screenshots/
+bind = ,               Print, exec, hyprshot -m output -o ~/Pictures/Screenshots/
+
+#Pyprland Plugins
+bind = $mod CTRL, up, exec, pypr layout_center toggle # toggle the layout
+## focus change keys
+# bind = $mod, left, exec, pypr layout_center prev
+# bind = $mod, right, exec, pypr layout_center next
+# bind = $mod, up, exec, pypr layout_center prev2
+# bind = $mod, down, exec, pypr layout_center next2
+
+# Noctalia-Shell
+
+bind = $mod CTRL, S, exec, $noctalia settings toggle
+bind = $mod ALT, S, exec, $noctalia sessionMenu toggle
+bind = $mod CTRL, C, exec, $noctalia controlCenter toggle
+bind = $mod SHIFT, M, exec, $noctalia systemMonitor toggle
+bind = $mod SHIFT, F1, exec, $noctalia idleInhibitor toggle
+bind = $mod,       F1, exec, $noctalia plugin:keybind-cheatsheet toggle
+bind = $mod,       F2, exec, $noctalia plugin togglePanel notes-scratchpad
+bind = $mod,       F3, exec, $noctalia plugin:todo togglePanel
+bind = $mod,       F4, exec, $noctalia plugin:weekly-calendar togglePanel
+bind = $mod,       F5, exec, $noctalia plugin:github-feed toggle
+bind = $mod,       F6, exec, $noctalia notifications toggleHistory
+bind = $mod SHIFT, F9,exec, $noctalia wallpaper toggle
+bind = $mod ALT,   F9,exec, $noctalia wallpaper random
+bind = $mod CTRL,  F9, exec, $noctalia plugin:timer pause
+bind = $mod,       F9, exec, $noctalia plugin:timer start stopwatch
+bind = $mod SHIFT,  F11,exec, $noctalia dock toggle
+bind = $mod CTRL,  F12,exec, $noctalia bar toggle
+
+#=== System Settings
+
+# Audio
+bind   = $mod CTRL, F1, exec, $noctalia volume togglePanel
+bind   = , F1, exec, $noctalia media toggle
+bindle = , XF86AudioRaiseVolume, exec, $noctalia volume increase
+bindle = , XF86AudioLowerVolume, exec, $noctalia volume decrease
+bindl  = , XF86AudioMute,        exec, $noctalia volume muteOutput
+bindl  = , XF86AudioPlay, exec, $noctalia media playPause
+bindl = , xf86AudioNext, exec, $noctalia media next
+bindl = , xf86AudioPrev, exec, $noctalia media previous
+bindl = , xf86AudioStop, exec, $noctalia media pause
+
+# Brightness
+#bindle = , XF86MonBrightnessUp,   exec, $noctalia brightness increase
+#bindle = , XF86MonBrightnessDown, exec, $noctalia brightness decrease
+
+# Network / BT
+bind = $mod ALT, W, exec, $noctalia wifi toggle
+bind = $mod ALT, N,     exec, $noctalia network togglePanel
+
+# Power / Battery
+#bind = $mod ALT, B,     exec, $noctalia battery togglePanel
+bind = $mod ALT, P, exec, $noctalia powerProfile cycle
+
+# Mouse drag
+bindm = $mod, mouse:273, movewindow
+bindm = $mod, mouse:272, resizewindow
+
+### Layout Controls ###
+# Master Layout
+bind = $mod CTRL,     D, layoutmsg, removemaster
+bind = $mod,          I, layoutmsg, addmaster
+bind = $mod CTRL,     Return, layoutmsg, swapwithmaster
+bind = $mod,          M, exec, hyprctl dispatch splitratio 0.3
+
+# Dwindle Layout
+bind = $mod SHIFT,    I, togglesplit
+bind = $mod,          P, pseudo,
+
+# Groups
+bind = $mod,          G, togglegroup
+bind = $mod,          Tab, changegroupactive, f
+bind = $mod SHIFT,    Tab, changegroupactive, b
+bind = $mod CTRL,     K, moveintogroup, l
+bind = $mod CTRL,     L, moveintogroup, r
+bind = $mod CTRL,     H, moveoutofgroup
+
+# Windows managememt
+bind = $mod, H, movefocus, l
+bind = $mod, L, movefocus, r
+bind = $mod, K, movefocus, u
+bind = $mod, J, movefocus, 2
+bind = $mod ALT, H, swapwindow, l
+bind = $mod ALT, L, swapwindow, r
+bind = $mod ALT, K, swapwindow, u
+bind = $mod ALT, J, swapwindow, d
+bind = $mod CTRL, H, movewindow, l
+bind = $mod CTRL, L, movewindow, r
+bind = $mod CTRL, K, movewindow, u
+bind = $mod CTRL, J, movewindow, d
+bind = $mod SHIFT, H, resizeactive, -50 0
+bind = $mod SHIFT, L, resizeactive,  50 0
+bind = $mod SHIFT, K, resizeactive,   0 -50
+bind = $mod SHIFT, J, resizeactive,   0  50
+
+# Switch workspaces
+bind = $mod, Tab,            workspace, m+1
+bind = $mod SHIFT, Tab,      workspace, m-1
+bind = $mod, period,         workspace, e+1
+bind = $mod, comma,          workspace, e-1
+bind = $mod, mouse_down,     workspace, e+1
+bind = $mod, mouse_up,       workspace, e-1
+
+# Special Workspace
+bind = $mod,       U, togglespecialworkspace,
+bind = $mod SHIFT, U, movetoworkspace, special
+
+# Numeric workspaces (using key codes for layout independence)
+bind = $mod, code:10, workspace, 1
+bind = $mod, code:11, workspace, 2
+bind = $mod, code:12, workspace, 3
+bind = $mod, code:13, workspace, 4
+bind = $mod, code:14, workspace, 5
+bind = $mod, code:15, workspace, 6
+bind = $mod, code:16, workspace, 7
+bind = $mod, code:17, workspace, 8
+bind = $mod, code:18, workspace, 9
+bind = $mod, code:19, workspace, 10
+
+# Move window to workspace (and follow)
+bind = $mod SHIFT, code:10, movetoworkspace, 1
+bind = $mod SHIFT, code:11, movetoworkspace, 2
+bind = $mod SHIFT, code:12, movetoworkspace, 3
+bind = $mod SHIFT, code:13, movetoworkspace, 4
+bind = $mod SHIFT, code:14, movetoworkspace, 5
+bind = $mod SHIFT, code:15, movetoworkspace, 6
+bind = $mod SHIFT, code:16, movetoworkspace, 7
+bind = $mod SHIFT, code:17, movetoworkspace, 8
+bind = $mod SHIFT, code:18, movetoworkspace, 9
+bind = $mod SHIFT, code:19, movetoworkspace, 10
+bind = $mod SHIFT, bracketleft,  movetoworkspace, -1
+bind = $mod SHIFT, bracketright, movetoworkspace, +1
+
+# Move window silently (no follow)
+bind = $mod CTRL, code:10, movetoworkspacesilent, 1
+bind = $mod CTRL, code:11, movetoworkspacesilent, 2
+bind = $mod CTRL, code:12, movetoworkspacesilent, 3
+bind = $mod CTRL, code:13, movetoworkspacesilent, 4
+bind = $mod CTRL, code:14, movetoworkspacesilent, 5
+bind = $mod CTRL, code:15, movetoworkspacesilent, 6
+bind = $mod CTRL, code:16, movetoworkspacesilent, 7
+bind = $mod CTRL, code:17, movetoworkspacesilent, 8
+bind = $mod CTRL, code:18, movetoworkspacesilent, 9
+bind = $mod CTRL, code:19, movetoworkspacesilent, 10
+bind = $mod CTRL, bracketleft,  movetoworkspacesilent, -1
+bind = $mod CTRL, bracketright, movetoworkspacesilent, +1
+
+#Utilities
+#bind = $mod CTRL,  Delete, exec, hyprctl dispatch exit 0
+bind = $mod CTRL ALT,P,      exec, $scriptsDir/wlogout.sh
+
+# Cursor Zoom
+bind = $mod ALT, mouse_down, exec, hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {factor = $2; if (factor < 1) factor = 1; print factor * 2.0}')"
+bind = $mod ALT, mouse_up,   exec, hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {factor = $2; if (factor < 1) factor = 1; print factor / 2.0}')"

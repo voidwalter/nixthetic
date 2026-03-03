@@ -52,7 +52,7 @@ CHOICE=$(
 
 case "$CHOICE" in
 "Quit")
-  success "Bye! 👋"
+  success "Bye!"
   exit 0
   ;;
 
@@ -115,11 +115,6 @@ ${GREEN}$(echo "$SELECTED" | tr '\n' ' ')${RESET}"
     "docker.io" "docker-compose"
   )
 
-  # For Debian/Ubuntu we can add more common ones
-  if [[ "$PKG_MANAGER" == "apt" ]]; then
-    DEV_TOOLS+=("software-properties-common" "apt-transport-https" "ca-certificates")
-  fi
-
   SELECTED=$(gum choose --no-limit --height 20 \
     --header "Select development tools to install (Space = toggle)" \
     "${DEV_TOOLS[@]}")
@@ -180,5 +175,4 @@ ${GREEN}$(echo "$SELECTED" | tr '\n' ' ')${RESET}"
   fi
   ;;
 esac
-
 gum style --foreground 39 --bold --margin "1 2" "Done!"
